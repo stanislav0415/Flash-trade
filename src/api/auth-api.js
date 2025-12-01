@@ -10,31 +10,13 @@ export const register = async(email,password,steamTradeLink) => {
     const result = await post(`${BASE_URL}/register`,{email,password,steamTradeLink});
     return result;
 }
- export const fetchUser = async (changeAuthState) => {
-    try {
-      const result = await get(`${BASE_URL}/profile`);
-      if (result!==null) {
-        changeAuthState({
-          email: result.email,
-          isAuthenticated: true,
-        });
-      } else {
-        changeAuthState({
-          email: '',
-          isAuthenticated: false,
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching user', error);
-    }
-  };
 
   export const logoutReq = async(changeAuthState)=>{
     await post(`${BASE_URL}/logout`);
   
         changeAuthState({
           email: "",
-          isAdmin: false,
           isAuthenticated: false,
         });
+        localStorage.removeItem('user')
   }
