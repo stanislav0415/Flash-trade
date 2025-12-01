@@ -1,6 +1,37 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { useRegister } from "../../hooks/useAuth";
+import { useForm } from "../../hooks/useForm";
+
+const initialValues = { email: '', password: '', steamTradeLink: '' };
 
 export default function Register() {
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+  const register = useRegister();
+
+  const registerHandler = async ({ email, password, steamTradeLink }) => {
+    if (!email || !password || !steamTradeLink) {
+      setError("All fields are required.");
+      return;
+    }
+
+    try {
+      debugger;
+      const result = await register(email, password, steamTradeLink);
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        navigate("/login");
+      }
+    } catch (err) {
+      setError(err.message || "Registration failed.");
+    }
+  };
+
+  const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#222831] px-4">
       <div className="w-full max-w-md bg-[#31363F] rounded-2xl shadow-2xl p-8 border border-[#505661]">
@@ -9,23 +40,47 @@ export default function Register() {
           Register
         </h1>
 
-        <form className="flex flex-col gap-5">
+        <form onSubmit={submitHandler} className="flex flex-col gap-5">
 
           <input
             type="email"
+            name="email"
             placeholder="Email"
+            value={values.email}
+            onChange={changeHandler}
             className="p-3 rounded-xl bg-gray-800 text-white border border-gray-700
             focus:outline-none focus:ring-2 focus:ring-[#76ABAE]"
+            required
           />
 
           <input
             type="password"
+            name="password"
             placeholder="Password"
+            value={values.password}
+            onChange={changeHandler}
             className="p-3 rounded-xl bg-gray-800 text-white border border-gray-700
             focus:outline-none focus:ring-2 focus:ring-[#76ABAE]"
+            required
           />
 
+          <input
+            type="text"
+            name="steamTradeLink"
+            placeholder="Steam Trade Link"
+            value={values.steamTradeLink}
+            onChange={changeHandler}
+            className="p-3 rounded-xl bg-gray-800 text-white border border-gray-700
+            focus:outline-none focus:ring-2 focus:ring-[#76ABAE]"
+            required
+          />
+
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
+
           <button
+            type="submit"
             className="w-full py-3 rounded-xl bg-[#76ABAE] hover:bg-[#5c8c8f] text-white text-lg font-semibold
             transition-all duration-200 shadow-lg"
           >

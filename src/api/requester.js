@@ -1,5 +1,5 @@
 export default async function requester(method, url, data) {
-    const options = {  credentials: 'include' };
+    const options = { };
     if (method !== 'GET') {
         options.method = method;
     }
@@ -10,7 +10,7 @@ export default async function requester(method, url, data) {
         options.body = JSON.stringify(data);
 
     }
-
+ console.log(data)
     const responce = await fetch(url, options);
 
     let result = {};

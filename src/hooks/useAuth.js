@@ -12,8 +12,8 @@ export const useLogin = () => {
     return loginHadler;
 }
 export const useRegister  = () =>{
- const registerHandler = async (email,password)=>{
-    const result = await register(email, password);
+ const registerHandler = async (email,password,steamTradeLink)=>{
+    const result = await register(email, password,steamTradeLink);
     return result
  }
  return registerHandler;

@@ -8,6 +8,7 @@ import Home from './components/home/Home';
 import Footer from './components/footer/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Logout from './components/auth/Logout.jsx';
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
           </>
         ) : (
           <>
-            
+            <Route path='/logout' element={<Logout />} />
           </>
         )}
         </Routes>

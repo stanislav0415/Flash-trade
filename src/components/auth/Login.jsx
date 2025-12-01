@@ -15,7 +15,6 @@ export default function Login() {
 
   const loginHandler = async ({ email, password }) => {
     try {
-      debugger;
       await login(email, password);
       await fetchUser(changeAuthState);
       navigate("/");
