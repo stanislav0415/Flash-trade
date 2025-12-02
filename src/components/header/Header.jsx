@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 export default function Header() {
     const { isAuthenticated } = useContext(AuthContext);
     return (
-        <nav className="bg-[#31363F] fixed z-20 top-4 left-0 right-0 mx-auto max-w-7xl rounded-2xl border border-[#505661] shadow-lg">
+       <nav className="bg-[#31363F] fixed z-20 top-4 left-0 right-0 mx-auto max-w-7xl rounded-2xl border border-[#505661] shadow-lg">
             <div className="flex flex-wrap items-center justify-between py-2 px-6">
                 <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="/Flash.png" className="h-10" alt="Flowbite Logo" />
@@ -29,7 +29,7 @@ export default function Header() {
 
                         <li>
                             <Link
-                                href="/skins"
+                                to="/skins"
                                 className="block py-2 px-6 text-white rounded-lg text-lg md:text-xl hover:bg-[#505661] transition-all"
                             >
                                 Skins
