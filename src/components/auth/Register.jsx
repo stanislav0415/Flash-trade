@@ -18,7 +18,6 @@ export default function Register() {
     }
 
     try {
-      debugger;
       const result = await register(email, password, steamTradeLink);
       if (result?.error) {
         setError(result.error);
