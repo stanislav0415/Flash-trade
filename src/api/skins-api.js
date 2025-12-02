@@ -12,4 +12,7 @@ export const like = async (id) => {
         const skin = await request.post(`${BASE_URL}/skins/${id}/like`);
         return skin;
 }
-
+export const deleteSkin = async (id) => {
+        const skin = await request.del(`${BASE_URL}/skins/${id}`);
+        return skin;
+}
