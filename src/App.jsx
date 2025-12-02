@@ -9,6 +9,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Logout from './components/auth/Logout.jsx';
 import Skins from './components/skins/all-skins/Skins.jsx';
+import ModalSkin from './components/details/ModalSkin.jsx';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -18,14 +19,14 @@ function App() {
   });
 
   useEffect(() => {
-  const savedUser = JSON.parse(localStorage.getItem('user'));
-  if (savedUser) {
-    setAuthState({
-      ...savedUser,
-      isAuthenticated: true, 
-    });
-  }
-}, []);
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+    if (savedUser) {
+      setAuthState({
+        ...savedUser,
+        isAuthenticated: true,
+      });
+    }
+  }, []);
 
   const changeAuthState = (state) => {
     setAuthState(state);
@@ -53,14 +54,15 @@ function App() {
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-             
+
           </>
         ) : (
           <>
             <Route path="/logout" element={<Logout />} />
           </>
         )}
-         <Route path="/skins" element={<Skins />} />
+        <Route path="/skins" element={<Skins />} />
+        <Route path="/skins/:skinId" element={<ModalSkin />} />
       </Routes>
       <Footer />
     </AuthContext.Provider>
