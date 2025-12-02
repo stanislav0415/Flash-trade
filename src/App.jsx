@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Logout from './components/auth/Logout.jsx';
+import Skins from './components/skins/all-skins/Skins.jsx';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -52,12 +53,14 @@ function App() {
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+             
           </>
         ) : (
           <>
             <Route path="/logout" element={<Logout />} />
           </>
         )}
+         <Route path="/skins" element={<Skins />} />
       </Routes>
       <Footer />
     </AuthContext.Provider>
