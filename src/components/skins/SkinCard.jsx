@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const rarityColors = {
   "Consumer Grade": "#B0C3D9",
@@ -15,10 +16,7 @@ export default function SkinCard({ skin }) {
 
   return (
     <div className="w-full max-w-sm bg-[#31363F] rounded-2xl shadow-2xl p-6 border border-[#505661] overflow-hidden flex flex-col justify-between">
-      
-     
       <div className="relative mb-6 flex justify-center rounded-xl border border-[#505661] overflow-hidden h-64">
-      
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -26,7 +24,6 @@ export default function SkinCard({ skin }) {
             filter: "blur(20px)",
           }}
         />
-       
         <img
           className="rounded-xl relative z-10 object-cover w-full h-full"
           src={skin.imageUrl}
@@ -34,13 +31,11 @@ export default function SkinCard({ skin }) {
         />
       </div>
 
-    
       <div className="text-center flex-1 flex flex-col justify-between">
         <div>
           <h5 className="text-xl font-bold mb-2 truncate" style={{ color: rarityColor }}>
             {skin.name}
           </h5>
-
           <p className="text-sm text-gray-300 mb-4">
             {skin.exterior} • Float: {skin.float.toFixed(2)}
             {skin.statTrak && " • StatTrak™"}
@@ -49,14 +44,12 @@ export default function SkinCard({ skin }) {
 
         <div className="flex justify-center items-center gap-4 mt-2">
           <span className="text-2xl font-bold text-white">${skin.price}</span>
-
-          <button
-            type="button"
+          <Link
+            to={`/skins/${skin.id}`}
             className="px-5 py-2 rounded-xl font-medium hover:brightness-110 transition-all duration-200 shadow-md bg-[#76ABAE] hover:bg-[#5c8c8f]"
-          
           >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>
