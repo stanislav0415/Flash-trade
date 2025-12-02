@@ -1,0 +1,124 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetOneSkin } from "../../hooks/useSkins";
+import Loading from "../loading/Loading";
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { HeartIcon as OutlineHeart } from "@heroicons/react/24/outline";
+import { HeartIcon as SolidHeart } from "@heroicons/react/24/solid";
+
+export default function ModalSkin() {
+    const { skinId } = useParams();
+    const [obj] = useGetOneSkin(skinId);
+    const skin = obj?.skin;
+    const navigate = useNavigate();
+
+    const { isAuthenticated } = useContext(AuthContext);
+
+    const [liked, setLiked] = useState(false); 
+
+    const rarityColors = {
+        "Consumer Grade": "#B0C3D9",
+        "Industrial Grade": "#5E98D9",
+        "Mil-Spec": "#4B69FF",
+        "Restricted": "#D32CE6",
+        "Classified": "#D32CE6",
+        "Covert": "#EB4B4B",
+        "Contraband": "#FFD700",
+        "Special": "#FF8000",
+    };
+
+    const onClose = () => navigate("/skins");
+
+    if (!skin || Object.keys(skin).length === 0) {
+        return <Loading />;
+    }
+
+    const rarityColor = rarityColors[skin.rarity] || "#76ABAE";
+
+    const handleLike = () => {
+     
+        setLiked(!liked);
+
+      
+        console.log(liked ? "Unliked" : "Liked", skin.name);
+    };
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
+       
+            <div
+                className="absolute inset-0"
+                onClick={onClose}
+                style={{
+                    backgroundColor: "rgba(0,0,0,0.25)",
+                    backdropFilter: "blur(8px)",
+                }}
+            />
+
+          
+            <div className="relative z-10 w-full max-w-sm mx-4 bg-[#31363F] rounded-2xl shadow-2xl p-6 flex flex-col justify-between">
+               
+                <button
+                    onClick={onClose}
+                    className="absolute top-3 right-3 text-white text-2xl font-bold hover:text-red-500 transition"
+                >
+                    &times;
+                </button>
+
+             
+                <div className="relative m-4 flex justify-center rounded-xl overflow-hidden h-64 border border-[#505661]">
+                    <div
+                        className="absolute inset-0 z-0"
+                        style={{
+                            background: `radial-gradient(circle at bottom center, ${rarityColor}40 0%, transparent 70%)`,
+                            filter: "blur(20px)",
+                        }}
+                    />
+                    <img
+                        className="rounded-xl relative z-10 object-cover w-full h-full shadow-2xl"
+                        src={skin.imageUrl}
+                        alt={skin.name}
+                    />
+                </div>
+
+                
+                <div className="text-center flex-1 flex flex-col justify-between">
+                    <h5 className="text-xl font-bold mb-2" style={{ color: rarityColor }}>
+                        {skin.name}
+                    </h5>
+                    <p className="text-white mb-1">Weapon: {skin.weapon}</p>
+                    <p className="text-white mb-1">Skin: {skin.skin}</p>
+                    <p className="text-white mb-1">Exterior: {skin.exterior}</p>
+                    <p className="text-white mb-1">Float: {skin.float.toFixed(2)}</p>
+                    <p className="text-white mb-1">Price: ${skin.price}</p>
+                    <p className="text-white mb-1">StatTrak: {skin.statTrak ? "Yes" : "No"}</p>
+                    <p className="text-white mb-1">Rarity: {skin.rarity}</p>
+
+                
+                    <div className="mt-4 flex gap-3 justify-center items-center">
+                        <button
+                            className="flex-1 py-2 rounded-xl font-bold text-[#222831] shadow-md"
+                            style={{ backgroundColor: rarityColor }}
+                            onClick={() => console.log("Do action")}
+                        >
+                            Take Action
+                        </button>
+
+                        {isAuthenticated && (
+                            <div
+                                className="mt-2 flex justify-center cursor-pointer"
+                                onClick={() => setLiked(!liked)}
+                            >
+                                {liked ? (
+                                    <SolidHeart className="h-6 w-6" style={{ color: "#76ABAE" }} />
+                                ) : (
+                                    <OutlineHeart className="h-6 w-6 text-white" />
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
