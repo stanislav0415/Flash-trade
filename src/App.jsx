@@ -13,6 +13,7 @@ import ModalSkin from './components/details/ModalSkin.jsx';
 import SellSkin from './components/sell/Sell.jsx';
 import EditSkin from './components/edit/Edit.jsx';
 import BuySkin from './components/buy/BuySkin.jsx';
+import About from './components/about/About.jsx';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -61,14 +62,15 @@ function App() {
           </>
         ) : (
           <>
-          <Route path="/sell" element={<SellSkin />} />
-           <Route path="/:skinId/buy" element={<BuySkin />} />
-           <Route path="/skins/:skinId/edit" element={<EditSkin />} />
+            <Route path="/sell" element={<SellSkin />} />
+            <Route path="/:skinId/buy" element={<BuySkin />} />
+            <Route path="/skins/:skinId/edit" element={<EditSkin />} />
             <Route path="/logout" element={<Logout />} />
           </>
         )}
         <Route path="/skins" element={<Skins />} />
         <Route path="/skins/:skinId" element={<ModalSkin />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </AuthContext.Provider>
