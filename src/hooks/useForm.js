@@ -18,6 +18,7 @@ export function useForm(initialValues,submitCallback){
 
     return {
         values,
+        setValues,
         changeHandler,
         submitHandler,
     }

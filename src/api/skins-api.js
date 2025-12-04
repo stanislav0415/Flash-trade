@@ -16,3 +16,22 @@ export const deleteSkin = async (id) => {
         const skin = await request.del(`${BASE_URL}/skins/${id}`);
         return skin;
 }
+export const createSkin = async (skinData) => {
+    try {
+
+        const createdSkin = await request.post(`${BASE_URL}/skins/create`, skinData);
+        return createdSkin;
+    } catch (err) {
+        console.error("Failed to create skin:", err);
+        throw err;
+    }
+};
+export const editSkin = async (id, skinData) => {
+    try {
+        const updatedSkin = await request.put(`${BASE_URL}/skins/${id}`, skinData);
+        return updatedSkin;
+    } catch (err) {
+        console.error("Failed to edit skin:", err);
+        throw err;
+    }
+};
