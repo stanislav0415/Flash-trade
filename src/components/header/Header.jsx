@@ -26,7 +26,14 @@ export default function Header() {
                                 Home
                             </Link>
                         </li>
-
+                        <li>
+                            <Link
+                                to="/about"
+                                className="block py-2 px-6 text-white rounded-lg text-lg md:text-xl hover:bg-[#505661] transition-all"
+                            >
+                                About
+                            </Link>
+                        </li>
                         <li>
                             <Link
                                 to="/skins"
