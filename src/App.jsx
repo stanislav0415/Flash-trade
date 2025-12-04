@@ -10,6 +10,8 @@ import Register from './components/auth/Register';
 import Logout from './components/auth/Logout.jsx';
 import Skins from './components/skins/all-skins/Skins.jsx';
 import ModalSkin from './components/details/ModalSkin.jsx';
+import SellSkin from './components/sell/Sell.jsx';
+import EditSkin from './components/edit/Edit.jsx';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -58,6 +60,8 @@ function App() {
           </>
         ) : (
           <>
+          <Route path="/sell" element={<SellSkin />} />
+           <Route path="/skins/:skinId/edit" element={<EditSkin />} />
             <Route path="/logout" element={<Logout />} />
           </>
         )}
