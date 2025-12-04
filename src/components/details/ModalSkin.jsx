@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useGetOneSkin } from "../../hooks/useSkins";
 import Loading from "../loading/Loading";
 import { useContext, useState, useEffect } from "react";
@@ -10,12 +10,12 @@ import DeleteModal from "../delete/DeleteModal";
 
 export default function ModalSkin() {
     const { skinId } = useParams();
-    const [obj] = useGetOneSkin(skinId);
+    const [obj] = useGetOneSkin(skinId); // obj contains skin, isOwner, isLiked
     const skin = obj?.skin;
     const navigate = useNavigate();
     const { isAuthenticated } = useContext(AuthContext);
 
-    const [liked, setLiked] = useState(obj.isLiked);
+    const [liked, setLiked] = useState(obj?.isLiked || false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     useEffect(() => {
@@ -51,23 +51,19 @@ export default function ModalSkin() {
         "Special": "#FF8000",
     };
 
-    const onClose = () => navigate("/skins");
-    if (!skin || Object.keys(skin).length === 0) return <Loading />;
+    if (!skin) return <Loading />;
     const rarityColor = rarityColors[skin.rarity] || "#76ABAE";
+
+    const onClose = () => navigate("/skins");
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
-
-           
             <div
                 className="absolute inset-0 bg-black/30 backdrop-blur-sm"
                 onClick={onClose}
             />
 
-         
             <div className="relative z-10 w-full max-w-sm mx-4 bg-[#31363F] rounded-2xl shadow-2xl p-6 flex flex-col justify-between">
-
-               
                 <button
                     onClick={onClose}
                     className="absolute top-3 right-3 text-white text-2xl font-bold hover:text-red-500 transition"
@@ -75,7 +71,6 @@ export default function ModalSkin() {
                     &times;
                 </button>
 
-             
                 <div className="relative m-4 flex justify-center rounded-xl overflow-hidden h-64 border border-[#505661]">
                     <div
                         className="absolute inset-0 z-0"
@@ -91,7 +86,6 @@ export default function ModalSkin() {
                     />
                 </div>
 
-              
                 <div className="text-center flex-1 flex flex-col justify-between">
                     <h5 className="text-xl font-bold mb-2" style={{ color: rarityColor }}>
                         {skin.name}
@@ -104,30 +98,30 @@ export default function ModalSkin() {
                     <p className="text-white mb-1">StatTrak: {skin.statTrak ? "Yes" : "No"}</p>
                     <p className="text-white mb-1">Rarity: {skin.rarity}</p>
 
-                  
-                    <div className="mt-4 flex gap-3 justify-center items-center">
-                        <button
-                            className="flex-1 py-2 rounded-xl font-bold text-[#EEEEEE] shadow-md bg-[#76ABAE] hover:bg-[#5c8c8f]"
-                            onClick={() => console.log("Do action")}
-                        >
-                            Take Action
-                        </button>
-
-                        {isAuthenticated && (
-                            <div
-                                className="p-2 rounded-xl cursor-pointer flex justify-center items-center transition"
-                                onClick={handleLike}
+                    {!obj.isOwner && (
+                        <div className="mt-4 flex gap-3 justify-center items-center">
+                            <Link
+                                className="flex-1 py-2 rounded-xl font-bold text-[#EEEEEE] shadow-md bg-[#76ABAE] hover:bg-[#5c8c8f]"
+                                to={`/${skinId}/buy`}
                             >
-                                {liked ? (
-                                    <SolidHeart className="h-7 w-7" style={{ color: "#76ABAE" }} />
-                                ) : (
-                                    <OutlineHeart className="h-7 w-7 text-white" />
-                                )}
-                            </div>
-                        )}
-                    </div>
+                                Buy
+                            </Link>
 
-                 
+                            {isAuthenticated && (
+                                <div
+                                    className="p-2 rounded-xl cursor-pointer flex justify-center items-center transition"
+                                    onClick={handleLike}
+                                >
+                                    {liked ? (
+                                        <SolidHeart className="h-7 w-7" style={{ color: "#76ABAE" }} />
+                                    ) : (
+                                        <OutlineHeart className="h-7 w-7 text-white" />
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     {obj.isOwner && (
                         <div className="flex gap-3 w-full justify-center mt-4">
                             <button
@@ -148,7 +142,6 @@ export default function ModalSkin() {
                 </div>
             </div>
 
-          
             {showDeleteModal && (
                 <DeleteModal
                     message="Are you sure you want to delete this skin?"

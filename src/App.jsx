@@ -12,6 +12,7 @@ import Skins from './components/skins/all-skins/Skins.jsx';
 import ModalSkin from './components/details/ModalSkin.jsx';
 import SellSkin from './components/sell/Sell.jsx';
 import EditSkin from './components/edit/Edit.jsx';
+import BuySkin from './components/buy/BuySkin.jsx';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -61,6 +62,7 @@ function App() {
         ) : (
           <>
           <Route path="/sell" element={<SellSkin />} />
+           <Route path="/:skinId/buy" element={<BuySkin />} />
            <Route path="/skins/:skinId/edit" element={<EditSkin />} />
             <Route path="/logout" element={<Logout />} />
           </>
