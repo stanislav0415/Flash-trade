@@ -15,7 +15,7 @@ export function useGetAllSkins() {
 
 export function useGetOneSkin(skinId) {
 
-    const [skin, setSkins] = useState({});
+    const [skin, setSkins] = useState(null);
     useEffect(() => {
         getOne(skinId)
             .then(result => {
