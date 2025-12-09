@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
     return (
         <footer className="bg-[#31363F] rounded-2xl shadow-lg border border-[#505661] mx-auto max-w-7xl my-4">
@@ -7,17 +9,9 @@ export default function Footer() {
                 </span>
                 <ul className="flex flex-wrap items-center mt-3 md:mt-0 text-sm font-medium text-body">
                     <li>
-                        <a href="#" className="hover:underline me-4 md:me-6 text-white">About</a>
-                    </li>
-                    <li>
-                        <a href="#" className="hover:underline me-4 md:me-6 text-white">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href="#" className="hover:underline me-4 md:me-6 text-white">Licensing</a>
-                    </li>
-                    <li>
-                        <a href="#" className="hover:underline text-white">Contact</a>
-                    </li>
+                        <Link to="/about" className="hover:underline me-4 md:me-6 text-white">About</Link>
+                    </li>                
+                
                 </ul>
             </div>
         </footer>
