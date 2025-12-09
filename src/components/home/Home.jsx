@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
     return (
         <div className="bg-neutral-primary text-white min-h-screen">
-            {/* Hero Section */}
+         
             <section className="max-w-7xl mx-auto flex flex-col md:flex-row items-start px-6 pt-32 pb-12 gap-10">
                 <div className="md:w-1/2">
                     <h1 className="text-3xl md:text-4xl font-bold mb-6">
@@ -13,12 +15,12 @@ export default function Home() {
                         built for both casual traders and professionals.
                     </p>
                     <div className="flex gap-4">
-                        <button className="px-6 py-3 rounded-xl bg-[#76ABAE] hover:bg-[#5c8c8f] transition-all">
+                        <Link to="/skins" className="px-6 py-3 rounded-xl bg-[#76ABAE] hover:bg-[#5c8c8f] transition-all">
                             Explore Marketplace
-                        </button>
-                        <button className="px-6 py-3 rounded-xl bg-[#76ABAE] hover:bg-[#5c8c8f] transition-all">
+                        </Link>
+                        <Link to="/about" className="px-6 py-3 rounded-xl bg-[#76ABAE] hover:bg-[#5c8c8f] transition-all">
                             Learn More
-                        </button>
+                        </Link>
                     </div>
                 </div>
 
@@ -30,7 +32,6 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* FAQ Section */}
             <section className="max-w-5xl mx-auto mt-12 px-6 mb-20">
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
                     Frequently Asked Questions
