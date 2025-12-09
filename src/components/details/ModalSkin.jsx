@@ -1,33 +1,38 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useGetOneSkin } from "../../hooks/useSkins";
 import Loading from "../loading/Loading";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { HeartIcon as OutlineHeart } from "@heroicons/react/24/outline";
 import { HeartIcon as SolidHeart } from "@heroicons/react/24/solid";
-import { like, deleteSkin } from "../../api/skins-api";
+import { like, deleteSkin, getOne } from "../../api/skins-api";
 import DeleteModal from "../delete/DeleteModal";
 
 export default function ModalSkin() {
     const { skinId } = useParams();
-    const [obj] = useGetOneSkin(skinId); // obj contains skin, isOwner, isLiked
+    const [obj, setSkin] = useGetOneSkin(skinId);
     const skin = obj?.skin;
+
     const navigate = useNavigate();
     const { isAuthenticated } = useContext(AuthContext);
 
-    const [liked, setLiked] = useState(obj?.isLiked || false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    useEffect(() => {
-        if (obj?.isLiked !== undefined) setLiked(obj.isLiked);
-    }, [obj]);
+    if (!skin) return <Loading />;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user?._id;
+    const isLiked = userId && skin.likes.includes(userId);
+
 
     const handleLike = async () => {
+
+
         try {
-            const result = await like(skinId);
-            setLiked(result?.isLiked ?? !liked);
+            await like(skinId);
+            setSkin(await getOne(skinId))
+
         } catch (err) {
-            console.log("Like Error:", err);
+            console.error("Like Error:", err);
         }
     };
 
@@ -51,7 +56,6 @@ export default function ModalSkin() {
         "Special": "#FF8000",
     };
 
-    if (!skin) return <Loading />;
     const rarityColor = rarityColors[skin.rarity] || "#76ABAE";
 
     const onClose = () => navigate("/skins");
@@ -109,14 +113,15 @@ export default function ModalSkin() {
 
                             {isAuthenticated && (
                                 <div
-                                    className="p-2 rounded-xl cursor-pointer flex justify-center items-center transition"
+                                    className="p-2 rounded-xl cursor-pointer flex justify-center items-center gap-2 transition"
                                     onClick={handleLike}
                                 >
-                                    {liked ? (
+                                    {isLiked ? (
                                         <SolidHeart className="h-7 w-7" style={{ color: "#76ABAE" }} />
                                     ) : (
                                         <OutlineHeart className="h-7 w-7 text-white" />
                                     )}
+                                    <span className="text-white font-semibold">{skin.likes?.length || 0}</span>
                                 </div>
                             )}
                         </div>
