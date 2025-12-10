@@ -1,16 +1,97 @@
-# React + Vite
+# 🔫 Flash-Trade
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Flash-Trade is a CS2 skin marketplace where users can browse skins, like them, sell their own skins, and purchase skins using a dummy payment system.  
+Built with **React**, customizable for any backend, and structured for easy expansion.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📚 Table of Contents
+1. [✨ Features](#-features)
+2. [🛠 Tech Stack](#-tech-stack)
+3. [🎮 Core Functionality](#-core-functionality)
+4. [🚀 Future Improvements](#-future-improvements)
+5. [🤝 Contributing](#-contributing)
+6. [📄 License](#-license)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+### 🎨 Skin Listings
+- View all CS2 skins
+- View detailed info for each skin
+- Display images, price, float, ext.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ❤️ Likes
+- Like or unlike any skin
+
+### 📝 Skin Management
+- Create a skin listing
+- Upload an image
+- Edit your own listings
+- Delete your own listings
+
+### 💳 Dummy Payments
+- Simple fake credit card checkout
+- Simulated purchase success/failure
+- No real payment processing
+
+### 👤 Lightweight Authentication
+- Frontend-only demo login
+- Author-based permissions
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- **React** (JavaScript)
+- **React Router**
+- **CSS / Tailwind**
+- **LocalStorage**
+
+### Backend 
+- Node.js + Express
+
+## 🎮 Core Functionality
+
+### 🔍 Browsing
+Users can browse all available skins displayed in responsive card format.
+
+### ❤️ Liking Skins
+Each skin includes a heart icon that toggles likes.
+
+### 📝 Create, Edit, Delete
+Logged-in users can:
+- Create a skin listing
+- Edit their own listings
+- Delete their own listings
+
+### 💳 Fake Checkout
+The Buy button opens a dummy checkout form:
+- Enter a fake card number
+- App simulates a successful purchase
+
+---
+
+## 🚀 Future Improvements
+- Real Stripe / PayPal payments
+- Full authentication (JWT, Firebase Auth)
+- User profiles with avatars and details
+- Admin moderation panel
+- Real database integration
+- Advanced filters & sorting
+- Notification system
+- Chat between buyers and sellers
+
+---
+
+## 🤝 Contributing
+
+Contributions are always welcome!
+
+### How to contribute:
+1. Fork this repository
+2. Clone your fork:
+   ```bash
+   git clone https://github.com/stanislav0415/flash-trade.git
