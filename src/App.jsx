@@ -14,6 +14,7 @@ import SellSkin from './components/sell/Sell.jsx';
 import EditSkin from './components/edit/Edit.jsx';
 import BuySkin from './components/buy/BuySkin.jsx';
 import About from './components/about/About.jsx';
+import PaymentComplete from './components/payment/Payment.jsx';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -64,6 +65,7 @@ function App() {
           <>
             <Route path="/sell" element={<SellSkin />} />
             <Route path="/:skinId/buy" element={<BuySkin />} />
+            <Route path="/payment-complete" element={<PaymentComplete />} />
             <Route path="/skins/:skinId/edit" element={<EditSkin />} />
             <Route path="/logout" element={<Logout />} />
           </>

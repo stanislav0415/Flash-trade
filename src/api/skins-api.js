@@ -35,3 +35,12 @@ export const editSkin = async (id, skinData) => {
         throw err;
     }
 };
+export const sellSkin = async (id) => {
+    try {
+        const skin = await request.post(`${BASE_URL}/skins/${id}/sell`);
+        return skin;
+    } catch (err) {
+        console.error("Failed to sell skin:", err);
+        throw err;
+    }
+};
