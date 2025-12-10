@@ -25,8 +25,6 @@ export default function ModalSkin() {
 
 
     const handleLike = async () => {
-
-
         try {
             await like(skinId);
             setSkin(await getOne(skinId))
@@ -128,21 +126,28 @@ export default function ModalSkin() {
                     )}
 
                     {obj.isOwner && (
-                        <div className="flex gap-3 w-full justify-center mt-4">
-                            <button
-                                onClick={() => navigate(`/skins/${skinId}/edit`)}
-                                className="flex-1 py-2 rounded-xl font-bold text-[#222831] shadow-md bg-yellow-500 hover:bg-yellow-400"
-                            >
-                                Edit
-                            </button>
+                        <>
+                            <div className="flex gap-3 w-full justify-center mt-4">
+                                <button
+                                    onClick={() => navigate(`/skins/${skinId}/edit`)}
+                                    className="flex-1 py-2 rounded-xl font-bold text-[#222831] shadow-md bg-yellow-500 hover:bg-yellow-400"
+                                >
+                                    Edit
+                                </button>
 
-                            <button
-                                onClick={() => setShowDeleteModal(true)}
-                                className="flex-1 py-2 rounded-xl font-bold text-white shadow-md bg-red-600 hover:bg-red-500"
-                            >
-                                Delete
-                            </button>
-                        </div>
+                                <button
+                                    onClick={() => setShowDeleteModal(true)}
+                                    className="flex-1 py-2 rounded-xl font-bold text-white shadow-md bg-red-600 hover:bg-red-500"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                            <div className="p-2 rounded-xl flex justify-center items-center gap-2">
+                                <SolidHeart className="h-7 w-7 text-[#76ABAE]" />
+                                <span className="text-white font-semibold">{skin.likes?.length || 0}</span>
+                            </div>
+                        </>
+
                     )}
                 </div>
             </div>
