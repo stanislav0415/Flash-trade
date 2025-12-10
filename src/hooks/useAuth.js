@@ -19,10 +19,14 @@ export const useLogin = () => {
 
   return loginHandler;
 };
-export const useRegister  = () =>{
- const registerHandler = async (email,password,steamTradeLink)=>{
-    const result = await register(email, password,steamTradeLink);
-    return result
- }
- return registerHandler;
-}
+export const useRegister = () => {
+  return async ({ email, password, steamTradeLink }) => {
+    try {
+      const result = await register(email, password, steamTradeLink); 
+      return result;
+    } catch (err) {
+      console.error("Registration error:", err);
+      throw err;
+    }
+  };
+};

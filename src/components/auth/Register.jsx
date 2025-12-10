@@ -11,30 +11,27 @@ export default function Register() {
   const navigate = useNavigate();
   const register = useRegister();
 
-  const registerHandler = async ({ email, password, steamTradeLink }) => {
+  const registerHandler = async (formValues) => {
+    const { email, password, steamTradeLink } = formValues;
+
     if (!email || !password || !steamTradeLink) {
       setError("All fields are required.");
       return;
     }
 
     try {
-      const result = await register(email, password, steamTradeLink);
-      if (result?.error) {
-        setError(result.error);
-      } else {
-        navigate("/login");
-      }
+    await register({ email, password, steamTradeLink });
+      navigate("/login");
     } catch (err) {
       setError(err.message || "Registration failed.");
     }
   };
-
   const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#222831] px-4">
       <div className="w-full max-w-md bg-[#31363F] rounded-2xl shadow-2xl p-8 border border-[#505661]">
-        
+
         <h1 className="text-3xl font-bold text-center mb-6 text-[#76ABAE]">
           Register
         </h1>
